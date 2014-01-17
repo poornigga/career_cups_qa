@@ -4,11 +4,11 @@ CAREER_CAP
 
 ## hash table
 
-node {
+`node {
     key_hash;
     key_len;
     value:[key + value];
-}
+}`
 
 list[node-node-node].
 
