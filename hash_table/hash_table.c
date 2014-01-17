@@ -86,8 +86,8 @@ char *get(char *key) {
     } else {
         node *n = l->node;
         while (n) {
-            if (n->key == func(key) && n->len = strlen(key) && 
-                memcmp(n->value, key, strlen(key)) ) {
+            if (n->key == func(key) && n->len == strlen(key) && 
+                !memcmp(n->value, key, strlen(key)) ) {
                 return n;
             }
             n = n->next;
