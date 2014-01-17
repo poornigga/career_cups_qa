@@ -5,6 +5,8 @@ CAREER_CAP
 ## hash table
 
 
+`
+
 node {
 
     key_hash;
@@ -16,10 +18,10 @@ node {
 }
 
 
-list[node-node-node].
+list [  node - node - node ]
 
 
-bucket[list-list-list].
+bucket [ list - list - list ]
 
 
 table {
@@ -32,8 +34,8 @@ table {
 
     func2:len(key);
 
-};
+}
 
 
-
+`
 
