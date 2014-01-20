@@ -5,7 +5,6 @@ CAREER_CAP
 ## hash table
 
 
-`
 
 node {
 
@@ -37,5 +36,7 @@ table {
 }
 
 
-`
 
+## test
+
+    clang -g -Wall *.c -o test

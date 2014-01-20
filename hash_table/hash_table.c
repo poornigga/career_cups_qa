@@ -25,15 +25,16 @@
  * hash table api
  */
 
-static hash_table *htb;
+//static hash_table *htb;
 
+node *node_gen(hash_table *htb, char *key, char *val) ;
 
-int func(char *key) {
+int func(int size, char *key) {
     assert(key&&strlen(key)>0);
-    return (strlen(key)%htb->num);
+    return (strlen(key)%size);
 }
 
-int func2(char *key) {
+int func2(int size, char *key) {
     return strlen(key);
 }
 
@@ -44,11 +45,12 @@ int htb_init(hash_table **htb, int size) {
     hash_table *ht = malloc(sizeof(hash_table) + sizeof(list)*size);
     assert(ht);
 
-    ht->num = size;
+    ht->size= size;
     ht->func[0] = func;
     ht->func[1] = func2;
+    ht->bucket =(list *) (ht + sizeof(hash_table));
     *htb = ht;
-    return 1;
+    return 0;
 }
 
 int htb_release(hash_table *htb) {
@@ -59,12 +61,12 @@ int htb_release(hash_table *htb) {
     list *l;
     node *n, *t;
     for(int i=0; i<htb->size; ++i) {
-        l = htb->bucket[i];
-        n = l->node;
+        l = &htb->bucket[i];
+        n = l->n;
         while(n) {
             t = n;
             n = n->next;
-            free(t) t = NULL;
+            free(t); t = NULL;
         }
     }
 
@@ -74,21 +76,21 @@ int htb_release(hash_table *htb) {
     return 0;
 }
 
-char *get(char *key) {
+char *get(hash_table *htb, char *key) {
     if (NULL == key) return NULL;
-    int hkey = htb->func(key);
-    list *l = htb->bucket[htb->func(key)-1];
+    int hkey = (*htb->func)(htb->size, key);
+    list *l = &htb->bucket[(*htb->func)(htb->size, key)-1];
 
     if (l->num == 0 ) {
         return NULL;
     } else if (l->num == 1) {
-        return l->node->value;
+        return l->n->value;
     } else {
-        node *n = l->node;
+        node *n = l->n;
         while (n) {
-            if (n->key == func(key) && n->len == strlen(key) && 
+            if (n->key == func(htb->size, key) && n->len == strlen(key) && 
                 !memcmp(n->value, key, strlen(key)) ) {
-                return n;
+                return n->value + strlen(key);
             }
             n = n->next;
         }
@@ -97,19 +99,19 @@ char *get(char *key) {
     return NULL;
 }
 
-int set(char *key, char *value) {
+int set(hash_table *htb, char *key, char *value) {
     if (NULL == key || NULL == value) {
         return 1;
     }
 
-    node *n = gen(key, value);
-    list *l = htb->bucket[htb->func(key)-1];
+    node *n = node_gen(htb, key, value);
+    list *l = &htb->bucket[(*htb->func)(htb->size, key)-1];
     if (l->num == 0) {
-        l->node = n;
+        l->n= n;
     } else if (l->num == 1) {
-        l->node->next = n;
+        l->n->next = n;
     } else {
-        node *c = l->node;
+        node *c = l->n;
         while(c->next != NULL) {
             c = c->next;
         }
@@ -122,7 +124,7 @@ int set(char *key, char *value) {
     return 0;
 }
 
-node *gen(char *key, char *val) {
+node *node_gen(hash_table *htb, char *key, char *val) {
     if (NULL == key || NULL == val) {
         return NULL;
     }
@@ -131,7 +133,7 @@ node *gen(char *key, char *val) {
     if (NULL == n) return NULL;
 
     n->next = NULL;
-    n->key = func(key);
+    n->key = (*htb->func)(htb->size, key);
     n->len = strlen(key);
     memcpy(n->value, key, strlen(key));
     memcpy(n->value+strlen(key), val, strlen(val));
