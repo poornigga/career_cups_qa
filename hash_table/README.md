@@ -38,5 +38,5 @@ table {
 
 
 ## test
-
-    clang -g -Wall *.c -o test
+    
+    make clean; make
