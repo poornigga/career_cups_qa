@@ -30,8 +30,7 @@ static hash_table *htb;
 int main ( int argc, char *argv[] ) {
     
     int bucket_size = 8;
-
-    htb_init(&htb, 8);
+    htb_init(&htb, bucket_size);
 
     set(htb, "hello", "world");
 

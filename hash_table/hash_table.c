@@ -27,14 +27,14 @@
 
 //static hash_table *htb;
 
-node *node_gen(hash_table *htb, char *key, char *val) ;
+node *node_gen(hash_table *htb, const char *key, const char *val) ;
 
-int func(int size, char *key) {
+int func(int size, const char *key) {
     assert(key&&strlen(key)>0);
     return (strlen(key)%size);
 }
 
-int func2(int size, char *key) {
+int func2(int size, const char *key) {
     return strlen(key);
 }
 
@@ -76,9 +76,8 @@ int htb_release(hash_table *htb) {
     return 0;
 }
 
-char *get(hash_table *htb, char *key) {
+char *get(hash_table *htb, const char *key) {
     if (NULL == key) return NULL;
-    int hkey = (*htb->func)(htb->size, key);
     list *l = &htb->bucket[(*htb->func)(htb->size, key)-1];
 
     if (l->num == 0 ) {
@@ -99,7 +98,7 @@ char *get(hash_table *htb, char *key) {
     return NULL;
 }
 
-int set(hash_table *htb, char *key, char *value) {
+int set(hash_table *htb, const char *key, const char *value) {
     if (NULL == key || NULL == value) {
         return 1;
     }
@@ -124,7 +123,7 @@ int set(hash_table *htb, char *key, char *value) {
     return 0;
 }
 
-node *node_gen(hash_table *htb, char *key, char *val) {
+node *node_gen(hash_table *htb, const char *key, const char *val) {
     if (NULL == key || NULL == val) {
         return NULL;
     }

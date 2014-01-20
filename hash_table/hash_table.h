@@ -22,7 +22,7 @@
 #include <string.h>
 #include <stdint.h>
 
-typedef int (*hash_func)(int size, char *str);
+typedef int (*hash_func)(int size, const char *str);
 
 #pragma pack(push)
 #pragma pack(1)
@@ -54,7 +54,7 @@ typedef struct _hash_table_ {
 int htb_init(hash_table **htb, int size) ;
 int htb_release(hash_table *htb) ;
 
-char *get(hash_table *htb, char *key);
-int set(hash_table *htb, char *key, char *value);
+char *get(hash_table *htb, const char *key);
+int set(hash_table *htb, const char *key, const char *value);
 
 #endif
