@@ -1,8 +1,4 @@
-/*
-<!--
-
-
-                                         
+`
                                    .. .vr       
                                  qBMBBBMBMY     
                                 8BBBBBOBMBMv    
@@ -30,14 +26,7 @@
             :r2. rMBGBMGi .7Y, 1i::i   vO0PMNNSXXEqP@Secbone.
             .i1r. .jkY,    vE. iY....  20Fq0q5X5F1S2F22uuv1M; 
 
-
-
-
-
-
--->
-*/
-
+`
 
 career_cups_qa
 ==============
