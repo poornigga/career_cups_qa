@@ -34,19 +34,6 @@ int rm_dn (node *root) {
 #define p(a, b) \
     printf("%d - %d\n", a, b)
 
-int ac(void) {
-    int a[5] = {8, 4, 1, 2, 7};
-    int midx = -1;
-    for (int i=0; i<5; ++i) {
-        if(a[i] < a[4]) {
-            p (a[i], a[4]);
-            return 0;
-        }
-
-        midx = i++;
-    }
-}
-
 
 /* 
  * ===  FUNCTION  ======================================================================
