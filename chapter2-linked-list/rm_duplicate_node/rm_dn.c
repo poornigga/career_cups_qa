@@ -35,14 +35,8 @@ int rm_dn (node *root) {
     printf("%d - %d\n", a, b)
 
 
-/* 
- * ===  FUNCTION  ======================================================================
- *         Name:  main
- *  Description:  
- * =====================================================================================
- */
 int main ( int argc, char *argv[] ) {
     
    return EXIT_SUCCESS;
-}				/* ----------  end of function main  ---------- */
+}
 
