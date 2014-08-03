@@ -21,7 +21,10 @@
 #include <string.h>
 #include <stdint.h>
 #include "../linked_list.h"
+#include "../../include/common.h"
 
+#define pint(a, b) \
+    printf("%d - %d\n", a, b)
 
 
 int rm_dn (node *root) {
@@ -30,13 +33,17 @@ int rm_dn (node *root) {
     return 0;
 }
 
+int rm_dn_no_buf(node *root) {
+    if (NULL == root) return no;
 
-#define p(a, b) \
-    printf("%d - %d\n", a, b)
+    return yes;
+}
 
 
+
+#ifdef _T_RM
 int main ( int argc, char *argv[] ) {
     
    return EXIT_SUCCESS;
 }
-
+#endif
